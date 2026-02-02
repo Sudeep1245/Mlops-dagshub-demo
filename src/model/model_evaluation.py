@@ -79,7 +79,7 @@ with open('params.yaml','r') as f:
 
 def dagshub_tracking(accuracy,precision,recall,auc,params):
 
-    with mlflow.start_run(save_dvc_exp=True) as exp :
+    with mlflow.start_run() as exp :
         exp.log_metric('accuracy',accuracy)
         exp.log_metric('precision',precision)
         exp.log_metric('recall',recall)
