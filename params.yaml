@@ -1,6 +1,6 @@
 # file used for changing the the paramter of the files used in the pipeline 
 data_ingestion :
-  test_size : 0.18
+  test_size : 0.20
 
 feature_engineering :
   max_features : 80
