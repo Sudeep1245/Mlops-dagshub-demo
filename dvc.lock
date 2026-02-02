@@ -76,3 +76,23 @@ stages:
       hash: md5
       md5: 399877de05ae33f7789bb32f6da332ad
       size: 111343
+  model_evaluation:
+    cmd: python .\src\model\model_evaluation.py
+    deps:
+    - path: .\data\processed\test_bow.csv
+      hash: md5
+      md5: ac033b063dc3dbbf16e82afe659a281b
+      size: 304721
+    - path: .\models\model.pkl
+      hash: md5
+      md5: 399877de05ae33f7789bb32f6da332ad
+      size: 111343
+    - path: .\src\model\model_evaluation.py
+      hash: md5
+      md5: 066163da4e912a61f0f9db805250ef9b
+      size: 4025
+    outs:
+    - path: reports\metrics.json
+      hash: md5
+      md5: 4cc1b81faa4e54aeaad0055dcead618c
+      size: 145
