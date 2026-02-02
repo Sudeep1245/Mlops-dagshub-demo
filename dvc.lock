@@ -1,0 +1,78 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python .\src\data\data_ingestion.py
+    deps:
+    - path: .\src\data\data_ingestion.py
+      hash: md5
+      md5: 12a6850b592c869df8a4114f31b4ab2f
+      size: 3977
+    params:
+      params.yaml:
+        data_ingestion.test_size: 0.18
+    outs:
+    - path: data\raw
+      hash: md5
+      md5: c8c42d0b10f946f8703adc2e87b31d99.dir
+      size: 827973
+      nfiles: 2
+  data_preprocessing:
+    cmd: python .\src\data\data_preprocessing.py
+    deps:
+    - path: .\data\raw
+      hash: md5
+      md5: c8c42d0b10f946f8703adc2e87b31d99.dir
+      size: 827973
+      nfiles: 2
+    - path: .\src\data\data_preprocessing.py
+      hash: md5
+      md5: bdbd069f7946c6e6cb0c7ea20634ce96
+      size: 6413
+    outs:
+    - path: data\interim
+      hash: md5
+      md5: c0e6ce7d60255422a9847516871174ff.dir
+      size: 566210
+      nfiles: 2
+  feature_engineering:
+    cmd: python .\src\features\feature_engineering.py
+    deps:
+    - path: .\data\interim
+      hash: md5
+      md5: c0e6ce7d60255422a9847516871174ff.dir
+      size: 566210
+      nfiles: 2
+    - path: .\src\features\feature_engineering.py
+      hash: md5
+      md5: c88bdab4876cc8d27e1ed27e6c4a5467
+      size: 5054
+    params:
+      params.yaml:
+        feature_engineering.max_features: 80
+    outs:
+    - path: .\data\processed
+      hash: md5
+      md5: ddacd8309ac3e42a517d2c3d63196efe.dir
+      size: 1691436
+      nfiles: 2
+  model_building:
+    cmd: python .\src\model\model_building.py
+    deps:
+    - path: .\data\processed
+      hash: md5
+      md5: ddacd8309ac3e42a517d2c3d63196efe.dir
+      size: 1691436
+      nfiles: 2
+    - path: .\src\model\model_building.py
+      hash: md5
+      md5: 7f4960aba3c8a2cf881dd5c1f80b7ba6
+      size: 2739
+    params:
+      params.yaml:
+        model_building.learning_rate: 0.1
+        model_building.n_estimators: 80
+    outs:
+    - path: .\models\model.pkl
+      hash: md5
+      md5: 399877de05ae33f7789bb32f6da332ad
+      size: 111343

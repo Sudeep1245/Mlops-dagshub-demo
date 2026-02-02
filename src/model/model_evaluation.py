@@ -102,7 +102,7 @@ def model_prediction():
         y_pred_proba = clf.predict_proba(X_test_bow)[:, 1]
 
         accuracy,precision,recall,auc=metric_cal(y_test,y_pred,y_pred_proba)
-        dvc(accuracy=accuracy,precision=precision,recall=recall,auc=auc,params=params)
+        dagshub_tracking(accuracy=accuracy,precision=precision,recall=recall,auc=auc,params=params)
         metric_dic = {
         'accuracy':accuracy,
         'precision' : precision,
