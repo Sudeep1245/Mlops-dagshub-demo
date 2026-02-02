@@ -14,7 +14,7 @@ import mlflow
 import dagshub
 dagshub.init(repo_owner='Sudeep1245', repo_name='Mlops-dagshub-demo', mlflow=True)
 
-mlflow.set_tracking_uri('https://github.com/Sudeep1245/Mlops-dagshub-demo.git')
+mlflow.set_tracking_uri('https://dagshub.com/Sudeep1245/Mlops-dagshub-demo.mlflow')
 
 logger = logging.getLogger('model_Evaluation')
 logger.setLevel('DEBUG')
@@ -79,15 +79,15 @@ with open('params.yaml','r') as f:
 
 def dagshub_tracking(accuracy,precision,recall,auc,params):
 
-    with mlflow.start_run() as exp :
-        exp.log_metric('accuracy',accuracy)
-        exp.log_metric('precision',precision)
-        exp.log_metric('recall',recall)
-        exp.log_metric('auc',auc)
+    with mlflow.start_run() :
+        mlflow.log_metric('accuracy',accuracy)
+        mlflow.log_metric('precision',precision)
+        mlflow.log_metric('recall',recall)
+        mlflow.log_metric('auc',auc)
 
         for file,value in params.items():
             for key,val in value.items():
-                exp.log_param(key,val)
+                mlflow.log_param(key,val)
 
 
 def model_prediction():
