@@ -1,0 +1,10 @@
+# file used for changing the the paramter of the files used in the pipeline 
+data_ingestion :
+  test_size : 0.18
+
+feature_engineering :
+  max_features : 80
+
+model_building :
+  n_estimators : 80
+  learning_rate : 0.1
